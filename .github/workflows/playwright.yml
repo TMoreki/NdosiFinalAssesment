@@ -35,7 +35,7 @@ jobs:
         run: mkdir -p test-results
 
       - name: Generate avatar fixture
-        run: node fixtures/create-avatar.js
+        run: npx ts-node fixtures/create-avatar.ts
 
       - name: Run UI tests
         run: npm run test:ui

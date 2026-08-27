@@ -1,8 +1,7 @@
-// Run: node fixtures/create-avatar.js
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-// Minimal valid 1x1 red PNG
+// Minimal valid 1x1 red PNG (base64)
 const PNG_B64 =
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwADhQGAWjR9awAAAABJRU5ErkJggg==';
 

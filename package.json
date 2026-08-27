@@ -6,12 +6,15 @@
     "test": "playwright test",
     "test:ui": "playwright test tests/ui",
     "test:api": "playwright test tests/api",
+    "create:avatar": "ts-node fixtures/create-avatar.ts",
     "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.0",
     "allure-playwright": "^3.0.0",
     "allure-commandline": "^2.29.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
