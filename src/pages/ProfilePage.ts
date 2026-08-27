@@ -2,27 +2,30 @@ import { expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class ProfilePage extends BasePage {
+  async assertLoggedIn() {
+    await expect(this.page.locator('button.user-pill')).toContainText('Menu▼');
+  }
+
   async goToMyProfile() {
-    await this.navigate('/my_account');
+    await this.page.locator('button.user-pill').click();
+    await this.page.locator('button').filter({ hasText: /My Profile/ }).click();
+    await this.page.waitForFunction(() => window.location.hash === '#profile', { timeout: 10000 });
   }
 
   async clickEditProfile() {
-    await this.page.click('a[href="/edit_account"]');
+    await this.page.locator('button').filter({ hasText: /Edit Profile/ }).click();
+    await this.page.waitForSelector('#profilePicture', { state: 'attached' });
   }
 
   async uploadProfilePicture(filePath: string) {
-    await this.page.locator('input[type="file"]').setInputFiles(filePath);
+    await this.page.locator('#profilePicture').setInputFiles(filePath);
   }
 
   async saveProfile() {
-    await this.page.click('[data-qa="update-button"]');
+    await this.page.locator('button').filter({ hasText: /Save Changes/ }).click();
   }
 
   async assertProfileUpdated() {
-    await expect(this.page.locator('text=Account Updated!')).toBeVisible();
-  }
-
-  async assertLoggedIn() {
-    await expect(this.page.locator('text=Logged in as')).toBeVisible();
+    await expect(this.page.locator('button').filter({ hasText: /Edit Profile/ })).toBeVisible({ timeout: 10000 });
   }
 }
