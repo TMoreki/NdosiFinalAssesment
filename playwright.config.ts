@@ -13,15 +13,15 @@ export default defineConfig({
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ],
   use: {
-    baseURL: process.env.BASE_URL || 'https://automationexercise.com',
     screenshot: 'on',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
+    launchOptions: { slowMo: 1500 },
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { browserName: 'chromium' },
     },
   ],
 });

@@ -3,6 +3,7 @@ import { TestData } from '../src/data/Testdata';
 
 test.describe('Profile Picture Update', () => {
   test('should login, navigate to profile and upload a new profile picture', async ({
+    page,
     loginPage,
     profilePage,
     avatarPath,
@@ -30,7 +31,9 @@ test.describe('Profile Picture Update', () => {
 
     // Step 6: Save and assert
     await profilePage.saveProfile();
+    await page.waitForTimeout(3000);
     await profilePage.screenshot('06-profile-updated');
     await profilePage.assertProfileUpdated();
+    await page.waitForTimeout(3000);
   });
 });
