@@ -4,8 +4,8 @@
   "description": "Playwright UI & API automation framework for Ndosi assessment",
   "scripts": {
     "test": "playwright test",
-    "test:ui": "playwright test tests/ui",
-    "test:api": "playwright test tests/api",
+    "test:ui": "playwright test tests/profile.spec.ts",
+    "test:api": "playwright test tests/api.spec.ts",
     "create:avatar": "ts-node fixtures/create-avatar.ts",
     "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },

@@ -36,25 +36,32 @@ A **TypeScript + Playwright** test automation framework covering UI and API test
 NdosiFinalAssesment/
 ├── .github/
 │   └── workflows/
-│       └── playwright.yml       # CI pipeline (push + daily midnight SAST)
+│       └── playwright.yml          # CI pipeline (push + daily midnight SAST)
 ├── fixtures/
-│   ├── avatar.png               # Test profile picture (auto-generated)
-│   └── create-avatar.js         # Script to generate avatar.png
+│   ├── avatar.png                  # Test profile picture (auto-generated)
+│   └── create-avatar.ts            # Script to generate avatar.png
+├── src/
+│   ├── data/
+│   │   ├── PlaywrightTests.csv     # CSV test data
+│   │   └── Testdata.ts             # Centralised test data
+│   ├── fixtures/
+│   │   └── CustomFixtures.ts       # Extended Playwright fixtures (page objects)
+│   ├── pages/
+│   │   ├── BasePage.ts             # Shared page utilities
+│   │   ├── LoginPage.ts            # Login page object
+│   │   └── ProfilePage.ts          # Profile page object
+│   └── utils/
+│       └── CsvReader.ts            # CSV file reader utility
 ├── tests/
-│   ├── ui/
-│   │   ├── pages/
-│   │   │   ├── LoginPage.ts     # Login page object
-│   │   │   └── ProfilePage.ts   # Profile/account page object
-│   │   └── profile.spec.ts      # UI test: login → upload profile picture
-│   └── api/
-│       └── profile-api.spec.ts  # API tests: validate response codes
-├── test-results/                # Screenshots captured during test run
-├── allure-results/              # Raw Allure data
-├── allure-report/               # Generated Allure HTML report
-├── playwright-report/           # Playwright built-in HTML report
-├── .env                         # Local credentials (not committed)
-├── .env.example                 # Credential template
-├── playwright.config.ts         # Playwright configuration
+│   ├── profile.spec.ts             # UI test: login → upload profile picture
+│   └── api.spec.ts                 # API tests: validate response codes
+├── test-results/                   # Screenshots captured during test run
+├── allure-results/                 # Raw Allure data
+├── allure-report/                  # Generated Allure HTML report
+├── playwright-report/              # Playwright built-in HTML report
+├── .env                            # Local credentials (not committed)
+├── .env.example                    # Credential template
+├── playwright.config.ts            # Playwright configuration
 ├── tsconfig.json
 └── package.json
 ```
