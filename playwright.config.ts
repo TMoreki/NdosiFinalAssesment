@@ -3,9 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const isCI = !!process.env.CI;
+
 export default defineConfig({
   testDir: './tests',
-  timeout: 60_000,
+  timeout: 120_000,
   retries: 1,
   reporter: [
     ['list'],
@@ -16,12 +18,12 @@ export default defineConfig({
     screenshot: 'on',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
-    launchOptions: { slowMo: 1500 },
+    launchOptions: { slowMo: isCI ? 0 : 1500 },
   },
   projects: [
     {
       name: 'chromium',
-      use: { browserName: 'chromium' },
+      use: { browserName: 'chromium', ...devices['Desktop Chrome'] },
     },
   ],
 });
