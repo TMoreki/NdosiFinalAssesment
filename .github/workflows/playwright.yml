@@ -35,7 +35,13 @@ jobs:
         run: mkdir -p test-results
 
       - name: Generate avatar fixture
-        run: npx ts-node fixtures/create-avatar.ts
+        run: node -e "
+          const fs = require('fs');
+          const PNG_B64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwADhQGAWjR9awAAAABJRU5ErkJggg==';
+          fs.mkdirSync('fixtures', { recursive: true });
+          fs.writeFileSync('fixtures/avatar.png', Buffer.from(PNG_B64, 'base64'));
+          console.log('fixtures/avatar.png created');
+        "
 
       - name: Run UI tests
         run: npm run test:ui

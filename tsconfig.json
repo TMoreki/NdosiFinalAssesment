@@ -9,5 +9,5 @@
     "outDir": "dist",
     "baseUrl": "."
   },
-  "include": ["tests/**/*.ts", "fixtures/**/*.ts", "playwright.config.ts"]
+  "include": ["tests/**/*.ts", "fixtures/**/*.ts", "src/**/*.ts", "playwright.config.ts"]
 }
