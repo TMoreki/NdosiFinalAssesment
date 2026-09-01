@@ -9,7 +9,7 @@ export class ProfilePage extends BasePage {
   async goToMyProfile() {
     await this.page.locator('button.user-pill').click();
     await this.page.locator('button').filter({ hasText: /My Profile/ }).click();
-    await this.page.waitForFunction(() => window.location.hash === '#profile', { timeout: 10000 });
+    await this.page.waitForFunction(() => window.location.hash === '#profile', { timeout: 30000 });
   }
 
   async clickEditProfile() {

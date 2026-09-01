@@ -1,7 +1,6 @@
 import { test, expect, request } from '@playwright/test';
-import { TestData } from '../src/data/Testdata';
 
-const BASE = TestData.baseUrl;
+const BASE = process.env.BASE_URL ?? 'https://ndosisimplifiedautomation.vercel.app';
 
 test.describe('API – Endpoint Validation (UI Flow Endpoints)', () => {
   let ctx: Awaited<ReturnType<typeof request.newContext>>;

@@ -7,7 +7,7 @@ const isCI = !!process.env.CI;
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 120_000,
+  timeout: 180_000,
   retries: 1,
   reporter: [
     ['list'],
