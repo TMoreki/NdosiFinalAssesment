@@ -1,6 +1,6 @@
 # Ndosi Final Assessment – Playwright Automation Framework
 
-A **TypeScript + Playwright** test automation framework covering UI and API testing for the [Automation Exercise](https://automationexercise.com) site.
+A **TypeScript + Playwright** test automation framework covering UI and API testing for the [Ndosi Simplified Automation](https://ndosisimplifiedautomation.vercel.app) site.
 
 ---
 
@@ -70,7 +70,7 @@ NdosiFinalAssesment/
 
 ## Prerequisites
 
-- Node.js **v20+**
+- Node.js **v24+**
 - npm **v9+**
 - Git
 
@@ -80,7 +80,7 @@ NdosiFinalAssesment/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/NdosiFinalAssesment.git
+git clone https://github.com/TMoreki/NdosiFinalAssesment.git
 cd NdosiFinalAssesment
 
 # 2. Install dependencies
@@ -94,7 +94,7 @@ cp .env.example .env
 # Edit .env and fill in USER_EMAIL and USER_PASSWORD
 
 # 5. Generate the avatar fixture
-node fixtures/create-avatar.js
+npx ts-node fixtures/create-avatar.ts
 ```
 
 ---
@@ -122,29 +122,30 @@ npm run report
 
 ## Test Coverage
 
-### UI Tests (`tests/ui/profile.spec.ts`)
+### UI Tests (`tests/profile.spec.ts`)
 
 | Step | Action | Assertion |
 |---|---|---|
-| 1 | Navigate to `/login` | Page loads |
-| 2 | Login with credentials | "Logged in as" text visible |
-| 3 | Navigate to My Account | Account page loads |
-| 4 | Click Edit Profile | Edit form visible |
+| 1 | Navigate to site and login | Dashboard hash `#dashboard` visible |
+| 2 | Click Menu button | Dropdown opens |
+| 3 | Click My Profile | Profile hash `#profile` visible |
+| 4 | Click Edit Profile | Profile picture input visible |
 | 5 | Upload `avatar.png` | File input populated |
-| 6 | Save profile | "Account Updated!" confirmation visible |
+| 6 | Save profile | Edit Profile button visible again (profile updated) |
 
 Screenshots are captured at every step and saved to `test-results/`.
 
-### API Tests (`tests/api/profile-api.spec.ts`)
+### API Tests (`tests/api.spec.ts`)
 
-| Endpoint | Method | Expected Response |
+Validates all endpoints interacted with during the UI flow, captured via Playwright network listener:
+
+| Endpoint | Method | Expected Status |
 |---|---|---|
-| `/api/productsList` | GET | HTTP 200 |
-| `/api/verifyLogin` | POST (valid) | HTTP 200, `responseCode: 200` |
-| `/api/verifyLogin` | POST (invalid) | HTTP 200, `responseCode: 404` |
-| `/api/getUserDetailByEmail` | GET | HTTP 200, `responseCode: 200` |
-| `/api/updateAccount` | PUT | HTTP 200, `responseCode: 200` |
-| `/api/deleteAccount` | DELETE | HTTP 200 |
+| `/` | GET | 200 |
+| `/static/css/main.a444fab9.css` | GET | 200 |
+| `/static/js/main.295bba08.js` | GET | 200 |
+| `/Nta%20Logo%20fnl.png` | GET | 200 |
+| `/static/media/Nta%20Logo%20fnl.d253f67aeddc87f99822.png` | GET | 200 |
 
 ---
 
@@ -167,7 +168,7 @@ npm run report
 The Allure report is also published to **GitHub Pages** on every push to `main`:
 
 ```
-https://<your-username>.github.io/<repo-name>/allure-report/
+https://tmoreki.github.io/NdosiFinalAssesment/allure-report/
 ```
 
 ---
@@ -186,7 +187,7 @@ The GitHub Actions workflow (`.github/workflows/playwright.yml`) triggers on:
 ### Pipeline Steps
 
 1. Checkout code
-2. Setup Node.js 20
+2. Setup Node.js 24
 3. `npm ci` – install dependencies
 4. Install Chromium browser
 5. Generate avatar fixture
@@ -211,7 +212,7 @@ Add these secrets in **Settings → Secrets and variables → Actions**:
 
 | Secret | Value |
 |---|---|
-| `BASE_URL` | `https://automationexercise.com` |
+| `BASE_URL` | `https://ndosisimplifiedautomation.vercel.app` |
 | `USER_EMAIL` | Your test account email |
 | `USER_PASSWORD` | Your test account password |
 
@@ -225,7 +226,7 @@ Screenshots are captured at each UI test step and uploaded as pipeline artifacts
 |---|---|
 | Login page | `test-results/01-login-page.png` |
 | Logged in | `test-results/02-logged-in.png` |
-| My Account | `test-results/03-my-account.png` |
+| My Profile | `test-results/03-my-account.png` |
 | Edit Profile | `test-results/04-edit-profile.png` |
 | Picture selected | `test-results/05-picture-selected.png` |
 | Profile updated | `test-results/06-profile-updated.png` |
