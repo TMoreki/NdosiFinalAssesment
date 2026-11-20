@@ -1,4 +1,4 @@
-import { test, expect } from '../src/fixtures/CustomFixtures';
+import { test } from '../src/fixtures/CustomFixtures';
 import { TestData } from '../src/data/Testdata';
 
 test.describe('Dashboard', () => {
@@ -8,12 +8,8 @@ test.describe('Dashboard', () => {
     await loginPage.screenshot('dashboard-01-login-page');
     await loginPage.login(TestData.user.email, TestData.user.password);
 
-    // Step 2: Assert dashboard loaded
+    // Step 2: Assert dashboard loaded with menu visible
     await dashboardPage.assertDashboardLoaded();
     await dashboardPage.screenshot('dashboard-02-loaded');
-
-    // Step 3: Assert menu visible
-    await dashboardPage.assertWelcomeVisible();
-    await dashboardPage.screenshot('dashboard-03-menu-visible');
   });
 });

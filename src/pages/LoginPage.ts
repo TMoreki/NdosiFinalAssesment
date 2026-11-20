@@ -1,15 +1,19 @@
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
+  private get emailInput() { return this.page.locator('#login-email'); }
+  private get passwordInput() { return this.page.locator('#login-password'); }
+  private get submitButton() { return this.page.locator('#login-submit'); }
+
   async goto() {
-    await this.page.goto('https://ndosisimplifiedautomation.vercel.app/#practice', { waitUntil: 'networkidle' });
-    await this.page.waitForSelector('#login-email', { state: 'visible' });
+    await super.goto('#practice');
+    await this.emailInput.waitFor({ state: 'visible' });
   }
 
   async login(email: string, password: string) {
-    await this.page.fill('#login-email', email);
-    await this.page.fill('#login-password', password);
-    await this.page.click('#login-submit');
-    await this.page.waitForFunction(() => window.location.hash === '#dashboard', { timeout: 30000 });
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.submitButton.click();
+    await this.waitForHash('#dashboard');
   }
 }

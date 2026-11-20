@@ -9,6 +9,8 @@ export default defineConfig({
   testDir: './tests',
   timeout: 180_000,
   retries: 1,
+  workers: 1,
+  fullyParallel: false,
   reporter: [
     ['list'],
     ['allure-playwright', { outputFolder: 'allure-results', detail: true }],
